@@ -18,14 +18,27 @@ namespace IARS_eBayHTMLBuilder
     {
         private FileStream oFile;
         private StreamWriter oFileStream;
+        private StreamReader ManuFile;
         private String sTitle;
         private String sFolderPath;
         private String sWebPath;
-        private String googleAPIKey = "AIzaSyCfZ3iSlDmSwhgtEdcsbzBpHx - FZwwvRJI";
+        private ManuFactureCode mCode;
+ //       private String googleAPIKey = "AIzaSyCfZ3iSlDmSwhgtEdcsbzBpHx - FZwwvRJI";
+
 
         public eBayHTMLBuilder()
         {
+            string path;
+            string DirPath;
+            string line;
             
+
+            path = System.IO.Path.GetDirectoryName(
+               System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
+            DirPath = path.Substring(6);
+            ManuFile = new StreamReader(DirPath + @"\Manufacture\ManuCode.txt");
+
+           
             InitializeComponent();
             this.Text = "eBay HTML Builder v1";
 
@@ -40,6 +53,12 @@ namespace IARS_eBayHTMLBuilder
             LDescriptionBox.Text = "Description";
 
             LManufactor.Text = "Manufacturer";
+            while ((line = ManuFile.ReadLine()) != null)
+            {
+                mCode = new ManuFactureCode(line.Substring(0, line.IndexOf(@"\")), line.Substring(line.IndexOf(@"\") + 1));
+                cbManufacture.Items.Add(mCode);
+            }
+
             LModel.Text = "Model #";
 
             LLeaseAmount.Text = "Lease Amount:";
@@ -77,23 +96,24 @@ namespace IARS_eBayHTMLBuilder
 
         private void button1_Click(object sender, EventArgs e)
         {
+            mCode = (ManuFactureCode)cbManufacture.SelectedItem;
             sTitle = tbHTMLTitle.Text;
-            sFolderPath = tbManufactor.Text + @"\" + tbModel.Text + @"\" + tbModel.Text + @".html";
-            sWebPath = tbManufactor.Text + @"/" + tbModel.Text + @"/" + tbModel.Text;
+            sFolderPath = mCode.sCode + @"\" + tbModel.Text + @"\" + mCode.sCode +"_" + tbModel.Text + @".html";
+            sWebPath = mCode.sCode + @"/" + tbModel.Text + @"/" + tbModel.Text;
 
-            if (File.Exists(@"D:\Data\Shared\Ecommerce\WebData" + sFolderPath))
+            if (File.Exists(@"D:\Data\Shared\Ecommerce\WebData\" + sFolderPath))
             {
-                File.Delete(@"D:\Data\Shared\Ecommerce\WebData" + sFolderPath);
+                File.Delete(@"D:\Data\Shared\Ecommerce\WebData\" + sFolderPath);
             }
-            if (Directory.Exists(@"D:\Data\Shared\Ecommerce\WebData" + tbManufactor.Text + @"\" + tbModel.Text))
+            if (Directory.Exists(@"D:\Data\Shared\Ecommerce\WebData\" + mCode.sCode + @"\" + tbModel.Text))
             {
-                oFile = File.Create(@"D:\Data\Shared\Ecommerce\WebData" + sFolderPath);
+                oFile = File.Create(@"D:\Data\Shared\Ecommerce\WebData\" + sFolderPath);
                 oFile.Close();
             }
             else
             {
-                Directory.CreateDirectory(@"D:\Data\Shared\Ecommerce\WebData" + tbManufactor.Text + @"\" + tbModel.Text);
-                oFile = File.Create(@"D:\Data\Shared\Ecommerce\WebData" + sFolderPath);
+                Directory.CreateDirectory(@"D:\Data\Shared\Ecommerce\WebData\" + mCode.sCode + @"\" + tbModel.Text);
+                oFile = File.Create(@"D:\Data\Shared\Ecommerce\WebData\" + sFolderPath);
                 oFile.Close();
             }
             oFileStream = new StreamWriter(oFile.Name);

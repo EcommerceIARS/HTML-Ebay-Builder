@@ -37,7 +37,6 @@
             this.LProductGoodness = new System.Windows.Forms.Label();
             this.tbListBox = new System.Windows.Forms.TextBox();
             this.LDescriptionBox = new System.Windows.Forms.Label();
-            this.tbManufactor = new System.Windows.Forms.TextBox();
             this.LManufactor = new System.Windows.Forms.Label();
             this.cbHasLeasing = new System.Windows.Forms.CheckBox();
             this.cbHasWarranty = new System.Windows.Forms.CheckBox();
@@ -57,6 +56,7 @@
             this.LLiftRes = new System.Windows.Forms.Label();
             this.cbSalesFloor = new System.Windows.Forms.CheckBox();
             this.cbSND = new System.Windows.Forms.CheckBox();
+            this.cbManufacture = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // formHTML
@@ -119,13 +119,6 @@
             this.LDescriptionBox.Size = new System.Drawing.Size(35, 13);
             this.LDescriptionBox.TabIndex = 6;
             this.LDescriptionBox.Text = "label1";
-            // 
-            // tbManufactor
-            // 
-            this.tbManufactor.Location = new System.Drawing.Point(122, 540);
-            this.tbManufactor.Name = "tbManufactor";
-            this.tbManufactor.Size = new System.Drawing.Size(97, 20);
-            this.tbManufactor.TabIndex = 3;
             // 
             // LManufactor
             // 
@@ -304,11 +297,20 @@
             this.cbSND.UseVisualStyleBackColor = true;
             this.cbSND.CheckedChanged += new System.EventHandler(this.cbSND_CheckedChanged);
             // 
+            // cbManufacture
+            // 
+            this.cbManufacture.FormattingEnabled = true;
+            this.cbManufacture.Location = new System.Drawing.Point(122, 535);
+            this.cbManufacture.Name = "cbManufacture";
+            this.cbManufacture.Size = new System.Drawing.Size(127, 21);
+            this.cbManufacture.TabIndex = 27;
+            // 
             // eBayHTMLBuilder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(877, 643);
+            this.Controls.Add(this.cbManufacture);
             this.Controls.Add(this.cbSND);
             this.Controls.Add(this.cbSalesFloor);
             this.Controls.Add(this.LLiftRes);
@@ -328,7 +330,6 @@
             this.Controls.Add(this.cbHasWarranty);
             this.Controls.Add(this.cbHasLeasing);
             this.Controls.Add(this.LManufactor);
-            this.Controls.Add(this.tbManufactor);
             this.Controls.Add(this.LDescriptionBox);
             this.Controls.Add(this.tbListBox);
             this.Controls.Add(this.LProductGoodness);
@@ -352,7 +353,6 @@
         private System.Windows.Forms.Label LProductGoodness;
         private System.Windows.Forms.TextBox tbListBox;
         private System.Windows.Forms.Label LDescriptionBox;
-        private System.Windows.Forms.TextBox tbManufactor;
         private System.Windows.Forms.Label LManufactor;
         private System.Windows.Forms.CheckBox cbHasLeasing;
         private System.Windows.Forms.CheckBox cbHasWarranty;
@@ -372,6 +372,7 @@
         private System.Windows.Forms.Label LLiftRes;
         private System.Windows.Forms.CheckBox cbSalesFloor;
         private System.Windows.Forms.CheckBox cbSND;
+        private System.Windows.Forms.ComboBox cbManufacture;
     }
 }
 
